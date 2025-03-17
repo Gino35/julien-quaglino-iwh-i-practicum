@@ -11,7 +11,7 @@ app.use(express.json());
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 
 // set axios default config for hubspot api call
-axios.defaults.baseURL = 'https://api.hubspot.com';
+axios.defaults.baseURL = 'https://api.hubapi.com';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + process.env.PRIVATE_APP_KEY;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
