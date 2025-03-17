@@ -14,5 +14,8 @@ html(lang="en")
                 label(for="region") Region
                 input(type="text" name="region")
                 input(type="submit" value="Submit")
+                div(style="text-align: center")
+                    if axiosError
+                        p(style="color: red")= `${axiosError}`
         div(style="text-align: center")
             a(href="/") Return to the homepage
