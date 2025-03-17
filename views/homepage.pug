@@ -1,0 +1,32 @@
+doctype html
+html
+    head
+        title Integrating With HubSpot I: Foundations
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .container
+            h1 Custom Object Table
+
+            if data.axiosError
+                div(style="text-align: center")
+                   p(style="color: red")= data.axiosError
+            else
+                a(href="/update-cobj" class="btn") Add to this table
+
+                table(class="datatable")
+                    thead
+                        tr
+                            th Name
+                            th City
+                            th Region
+                    tbody
+                        each record in data.records
+                            tr
+                                td= record.properties.name
+                                td= record.properties.city
+                                td= record.properties.region
+                    tfoot
+                        tr
+                            td(colspan="3")
+                             small= data.records.length + ' records found'

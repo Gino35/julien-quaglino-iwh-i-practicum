@@ -15,20 +15,39 @@ axios.defaults.baseURL = 'https://api.hubapi.com';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + process.env.PRIVATE_APP_KEY;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
+// Show all records of this type
 app.get('/', async (req, res) => {
-    console.log('GET /homepage')
+    const viewData = {records: [], axiosError: null}
+    const restaurants = '/crm/v3/objects/2-41953822?properties=name&properties=city&properties=region';
+    try {
+        let resp;
+        let after = 0;
+        do {
+            resp = await axios.get(restaurants + '&after='+after, {});
+            resp.data.results.forEach((record) => {
+                viewData.records.push(record);
+            })
+
+            // we are at the last page
+            if (typeof resp.data.paging == 'undefined') {
+                break;
+            }
+
+            // update cursor for next request
+            after = resp.data.paging.next.after;
+        } while (true)
+    } catch (err) {
+        viewData.axiosError = err.message;
+    }
+    res.render('homepage', {data: viewData});
 })
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
+// Display form to create new record
 app.get('/update-cobj', (req, res) => {
     res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'});
 })
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
+// post data to hubspot
 app.post('/update-cobj', async (req, res) => {
     const payload = {
         properties: {

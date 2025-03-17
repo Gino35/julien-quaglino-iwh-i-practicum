@@ -8,26 +8,7 @@ body, * {
 
 h1 {
     margin: 1rem;
-}
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
+    margin-left: 0;
 }
 
 .form-wrapper {
@@ -56,4 +37,49 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.container {
+    max-width: 768px;
+    margin: 2rem auto;
+}
+
+a.btn {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    background-color: #020617;
+    color: #fff;
+    padding: 0.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+table.datatable {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    width: 100%
+}
+
+table.datatable thead {
+    background-color: #777777;
+    color: #fff;
+}
+
+table.datatable thead th {
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.5rem;
+    border: 1px solid #999;
+}
+
+table.datatable tbody td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+table.datatable tfoot td {
+    text-align: center;
+    padding: 0.25rem;
+    border-width: 0;
+    font-style: italic;
 }
